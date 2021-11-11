@@ -1,0 +1,30 @@
+{
+  "name": "@ostro/view",
+  "version": "0.0.0-alpha.0",
+  "description": "OstroJS view",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@ostro/support": "^0.0.0-alpha.0",
+    "bluebird": "^3.7.2"
+  },
+  "keywords": [
+    "nodejs view",
+    "view"
+  ],
+  "author": "amar",
+  "license": "MIT",
+  "main": "FileNotFoundException.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ostrojs/view.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ostrojs/view/issues"
+  },
+  "homepage": "https://github.com/ostrojs/view#readme",
+  "engines": {
+    "node": ">= 12.0"
+  }
+}
