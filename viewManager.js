@@ -3,32 +3,14 @@ const ViewAdapter = require('./viewAdapter')
 const InvalidArgumentException = require('./InvalidArgumentException')
 const ErrorBag = require('@ostro/support/errorBag')
 const Input = require('@ostro/support/input')
-const kApp = Symbol('app')
-const kEngines = Symbol('engines')
-const kCustomEngines = Symbol('customEngines')
+const Manager = require('@ostro/support/manager')
 
-class ViewManager {
-    constructor($app) {
-        this.$app = $app
-        Object.defineProperties(this, {
-            [kEngines]: {
-                value: Object.create(null),
-                writable: true,
-            },
-            [kCustomEngines]: {
-                value: Object.create(null),
-                writable: true,
-            }
-        })
-    }
+class ViewManager extends Manager {
+
+    $type = 'view';
 
     engine(name = null) {
-        name = name ? name : this.getDefaultEngine();
-        return this[kEngines][name] = this.getDriver(name);
-    }
-
-    getDriver(name) {
-        return this[kEngines][name] || this.resolve(name);
+        return this.driver(name)
     }
 
     resolve($name) {
@@ -40,19 +22,9 @@ class ViewManager {
             config['options'] = {}
         }
         config['options']['path'] = config['root']
-        var driverMethod = 'create' + (config['driver']).ucfirst() + 'Driver';
-        if ((this[kCustomEngines][config['driver']])) {
-            return this.callCustomCreator(config);
-        } else if (this[driverMethod]) {
-            return this[driverMethod](config);
-        } else {
-            throw new InvalidArgumentException("Driver [{" + config['driver'] + "}] is not supported.");
-        }
+        return super.resolve($name, config)
     }
 
-    callCustomCreator($config) {
-        return this[kCustomEngines][$config['driver']];
-    }
 
     createTwigDriver($config) {
         return this.adapt(new(require('./adapter/twig'))($config['options']), $config);
@@ -74,27 +46,16 @@ class ViewManager {
         return this.adapt(new(require('./adapter/handlebar'))($config['options']), $config);
     }
 
-    extends(key, tpl) {
-        if (!this.getConfig(key)) {
-            throw new InvalidArgumentException(`Config not found for  [${key}] Engine.`);
-        }
-        this[kCustomEngines][key] = this.adapt(tpl, this.getConfig(key))
-    }
     adapt(adapter, config) {
         return new ViewAdapter(adapter, config);
     }
 
-    set($name, $engine) {
-        this[kEngines][$name] = $engine;
-        return this;
-    }
-
     getConfig(name) {
-        return this.$app['config']['view']['engines'][name];
+        return super.getConfig(`engines.${name}`);
     }
 
     getDefaultEngine() {
-        return this.$app['config']['view']['default'];
+        return this.getConfig('default');
     }
 
 }
