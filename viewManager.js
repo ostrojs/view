@@ -55,7 +55,7 @@ class ViewManager extends Manager {
     }
 
     getDefaultEngine() {
-        return this.getConfig('default');
+        return super.getConfig('default');
     }
 
 }
