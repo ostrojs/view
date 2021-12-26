@@ -1,6 +1,6 @@
 {
   "name": "@ostro/view",
-  "version": "0.0.0-alpha.3",
+  "version": "0.0.0-alpha.4",
   "description": "View module for OstroJS",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
