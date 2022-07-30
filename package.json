@@ -1,12 +1,12 @@
 {
   "name": "@ostro/view",
-  "version": "0.0.0-alpha.4",
+  "version": "1.0.0",
   "description": "View module for OstroJS",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@ostro/support": "^0.0.0-alpha",
+    "@ostro/support": "^1.0.2",
     "bluebird": "^3.7.2"
   },
   "engines": {
