@@ -1,31 +1,54 @@
 {
-  "name": "@ostro/view",
-  "version": "1.0.1",
-  "description": "View module for OstroJS",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "@ostro/support": "^1.0.2",
-    "bluebird": "^3.7.2"
-  },
-  "engines": {
-    "node": ">=12.0.0"
-  },
-  "engineStrict": true,
-  "keywords": [
-    "nodejs view",
-    "view"
-  ],
-  "author": "amar",
-  "license": "MIT",
-  "main": "viewManager.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ostrojs/view.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ostrojs/view/issues"
-  },
-  "homepage": "https://github.com/ostrojs/view#readme"
+    "name": "@ostro/view",
+    "version": "2.0.0-alpha.1",
+    "description": "View module for OstroJS",
+    "scripts": {
+        "build": "rm -rf build && npx tsc -p tsconfig.build.json && node scripts/build.js",
+        "prepublishOnly": "npm run build",
+        "test": "npx c8 npx jest",
+        "clean": "rm -rf build coverage"
+    },
+    "main": "build/viewManager.js",
+    "types": "build/viewManager.d.ts",
+    "files": [
+        "build"
+    ],
+    "exports": {
+        ".": {
+            "types": "./build/viewManager.d.ts",
+            "default": "./build/viewManager.js"
+        },
+        "./*": {
+            "types": "./build/*.d.ts",
+            "default": "./build/*.js"
+        }
+    },
+    "dependencies": {
+        "@ostro/contracts": "^2.0.0-alpha.1",
+        "@ostro/support": "^2.0.0-alpha.1",
+        "bluebird": "^3.7.2",
+        "lodash.get": "^4.4.2"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "engineStrict": true,
+    "keywords": [
+        "nodejs view",
+        "view"
+    ],
+    "author": "amar",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ostrojs/view.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ostrojs/view/issues"
+    },
+    "homepage": "https://github.com/ostrojs/view#readme",
+    "devDependencies": {
+        "@types/node": "^22.20.5",
+        "typescript": "^5.8.0"
+    }
 }
