@@ -1,6 +1,6 @@
 {
     "name": "@ostro/view",
-    "version": "2.0.0-alpha.1",
+    "version": "2.0.0-alpha.2",
     "description": "View module for OstroJS",
     "scripts": {
         "build": "rm -rf build && npx tsc -p tsconfig.build.json && node scripts/build.js",
@@ -9,23 +9,23 @@
         "clean": "rm -rf build coverage"
     },
     "main": "build/viewManager.js",
-    "types": "build/viewManager.d.ts",
+    "types": "./build/types/viewManager.d.ts",
     "files": [
         "build"
     ],
     "exports": {
         ".": {
-            "types": "./build/viewManager.d.ts",
+            "types": "./build/types/viewManager.d.ts",
             "default": "./build/viewManager.js"
         },
         "./*": {
-            "types": "./build/*.d.ts",
+            "types": "./build/types/*.d.ts",
             "default": "./build/*.js"
         }
     },
     "dependencies": {
-        "@ostro/contracts": "^2.0.0-alpha.1",
-        "@ostro/support": "^2.0.0-alpha.1",
+        "@ostro/contracts": "^2.0.0-alpha.2",
+        "@ostro/support": "^2.0.0-alpha.2",
         "bluebird": "^3.7.2",
         "lodash.get": "^4.4.2"
     },
