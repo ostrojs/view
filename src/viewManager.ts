@@ -1,4 +1,3 @@
-import '@ostro/support/helpers';
 import Manager from '@ostro/support/manager';
 import InvalidArgumentException from './InvalidArgumentException';
 import ViewAdapter from './viewAdapter';
