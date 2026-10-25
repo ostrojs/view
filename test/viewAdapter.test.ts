@@ -122,4 +122,10 @@ describe('ViewAdapter', () => {
             });
         });
     });
+
+    test('applyPathPrefix and applyExtension with default arguments and engine fallback', () => {
+        const adapterWithEngine = new ViewAdapter({}, { root: '/views', engine: 'pug' });
+        expect(adapterWithEngine.applyPathPrefix()).toBe('/views.pug');
+        expect(adapterWithEngine.applyExtension()).toBe('.pug');
+    });
 });

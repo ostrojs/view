@@ -25,7 +25,9 @@ export default {
         "^.+\\.ts$": [
             tsJestPath,
             {
-                "tsconfig": "<rootDir>/tsconfig.json"
+                "tsconfig": "<rootDir>/tsconfig.json",
+                "isolatedModules": true,
+                "diagnostics": false
             }
         ]
     },
