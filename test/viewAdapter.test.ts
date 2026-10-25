@@ -1,5 +1,6 @@
-const path = require('path');
-const fs = require('fs');
+import { describe, test, expect, beforeAll, afterAll, jest } from "@jest/globals";
+const path = require('node:path');
+const fs = require('node:fs');
 const _ViewAdapter = require('../src/viewAdapter');
 const ViewAdapter = _ViewAdapter.default || _ViewAdapter;
 

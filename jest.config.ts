@@ -1,6 +1,6 @@
-import { execSync } from "child_process";
-import path from "path";
-import fs from "fs";
+import { execSync } from "node:child_process";
+import path from 'node:path';
+import fs from 'node:fs';
 
 let tsJestPath = "ts-jest";
 try {
@@ -30,10 +30,6 @@ export default {
         ]
     },
     "moduleNameMapper": {
-        "^@ostro/support/(.*)$": "<rootDir>/../support/src/$1",
-        "^@ostro/support$": "<rootDir>/../support/src",
-        "^@ostro/contracts/(.*)$": "<rootDir>/../contracts/src/$1",
-        "^@ostro/contracts$": "<rootDir>/../contracts/src",
         "^@ostro/view/(.*)$": "<rootDir>/src/$1",
         "^@ostro/view$": "<rootDir>/src/viewManager"
     },

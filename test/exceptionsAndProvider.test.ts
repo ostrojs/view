@@ -1,3 +1,4 @@
+import { describe, test, expect, jest } from "@jest/globals";
 jest.mock('ejs', () => ({ render: jest.fn() }), { virtual: true });
 jest.mock('handlebars', () => ({ compile: jest.fn() }), { virtual: true });
 jest.mock('nunjucks', () => ({ configure: jest.fn(), renderString: jest.fn() }), { virtual: true });
