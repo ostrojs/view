@@ -1,15 +1,11 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import ObjectGet from 'lodash.get';
 
-const kAdapter: unique symbol = Symbol('adapter');
-const kConfig: unique symbol = Symbol('config');
-const kCache: unique symbol = Symbol('cache');
-
 class ViewAdapter {
-    [kAdapter]: any;
-    [kConfig]: Record<string, any>;
-    [kCache]: Record<string, string>;
+    #adapter: any;
+    #config: Record<string, any>;
+    #cache: Record<string, string>;
 
     /**
      * constructor method.
@@ -18,9 +14,9 @@ class ViewAdapter {
      * @param config - Configuration options dictionary
      */
     constructor($adapter: any, config: Record<string, any>) {
-        this[kAdapter] = $adapter;
-        this[kConfig] = config;
-        this[kCache] = Object.create(null);
+        this.#adapter = $adapter;
+        this.#config = config;
+        this.#cache = Object.create(null);
     }
 
     /**
@@ -34,7 +30,7 @@ class ViewAdapter {
         this.readFile(this.applyPathPrefix(file), (err: unknown, content?: string) => {
             if (err) return cb(err);
             try {
-                this[kAdapter].render(content, data, cb);
+                this.#adapter.render(content, data, cb);
             } catch (err) {
                 cb(err);
             }
@@ -49,13 +45,13 @@ class ViewAdapter {
      */
     readFile(filename: string, cb: (err: unknown, data?: string) => void): void {
         if (this.getConfig('cache')) {
-            if (this[kCache][filename]) {
-                return cb(null, this[kCache][filename]);
+            if (this.#cache[filename]) {
+                return cb(null, this.#cache[filename]);
             }
         }
         fs.readFile(filename, 'utf-8', (err: NodeJS.ErrnoException | null, data: string) => {
             if (this.getConfig('cache')) {
-                this[kCache][filename] = data;
+                this.#cache[filename] = data;
             }
             cb(err, data);
         });
@@ -68,7 +64,7 @@ class ViewAdapter {
      * @returns Configuration value or null
      */
     public getConfig(name: string): any {
-        return ObjectGet(this[kConfig], name, null);
+        return ObjectGet(this.#config, name, null);
     }
 
     /**
@@ -77,7 +73,7 @@ class ViewAdapter {
      * @returns Root directory path
      */
     public getRootPath(): string {
-        return this[kConfig]['root'] || '';
+        return this.#config['root'] || '';
     }
 
     /**
